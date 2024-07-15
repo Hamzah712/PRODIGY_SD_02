@@ -8,6 +8,7 @@ namespace PRODIGY_SD_02
     {
         private static Random random = new Random();
         private int targetNum;
+        private bool gameWon = false;
         int counter = 0;
 
         public form()
@@ -26,6 +27,15 @@ namespace PRODIGY_SD_02
             string userInput = inputTextBox.Text;
             int userNum;
 
+            if (gameWon) 
+            {
+                successResultLabel.Visible = false;
+                resultLabel.Text = "You've already won! Start a new game.";
+                resultLabel.Visible = true;
+                resultLabel.ForeColor = Color.DarkRed;
+                return;
+            }
+
             if (int.TryParse(userInput, out userNum))
             {
                 if (userNum < 0 || userNum > 100)
@@ -39,10 +49,11 @@ namespace PRODIGY_SD_02
                     counter++;
                     if (userNum == targetNum)
                     {
-                        resultLabel.Text = $"Congratulations! You guessed the correct number in {counter} attempt(s).";
-                        resultLabel.Visible = true;
-                        resultLabel.ForeColor = Color.Green;
+                        successResultLabel.Text = $"Congratulations! You guessed the correct number in {counter} attempt(s).";
+                        successResultLabel.Visible = true;
+                        successResultLabel.ForeColor = Color.Green;
                         resultProgressBar.Value = 100;
+                        gameWon = true;
                     }
                     else
                     {
@@ -85,8 +96,10 @@ namespace PRODIGY_SD_02
             targetNum = randNum();
             counter = 0;
             resultLabel.Visible = false;
+            successResultLabel.Visible = false;
             resultProgressBar.Value = 0;
             inputTextBox.Clear();
+            gameWon = false;
         }
     }
 }

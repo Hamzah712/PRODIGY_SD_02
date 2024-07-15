@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(form));
             contentPanel = new Panel();
+            successResultLabel = new Label();
             revealTargetLabel = new Label();
             resultLabel = new Label();
             resultProgressBar = new ProgressBar();
@@ -45,6 +46,7 @@
             // 
             contentPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             contentPanel.BackColor = SystemColors.ControlDark;
+            contentPanel.Controls.Add(successResultLabel);
             contentPanel.Controls.Add(revealTargetLabel);
             contentPanel.Controls.Add(resultLabel);
             contentPanel.Controls.Add(resultProgressBar);
@@ -55,8 +57,22 @@
             contentPanel.Controls.Add(titleLabel);
             contentPanel.Location = new Point(12, 12);
             contentPanel.Name = "contentPanel";
+            contentPanel.Padding = new Padding(5);
             contentPanel.Size = new Size(660, 337);
             contentPanel.TabIndex = 0;
+            // 
+            // successResultLabel
+            // 
+            successResultLabel.Anchor = AnchorStyles.None;
+            successResultLabel.AutoEllipsis = true;
+            successResultLabel.AutoSize = true;
+            successResultLabel.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            successResultLabel.Location = new Point(102, 183);
+            successResultLabel.Name = "successResultLabel";
+            successResultLabel.Size = new Size(32, 20);
+            successResultLabel.TabIndex = 8;
+            successResultLabel.Text = "Hi..";
+            successResultLabel.Visible = false;
             // 
             // revealTargetLabel
             // 
@@ -79,9 +95,10 @@
             // resultLabel
             // 
             resultLabel.Anchor = AnchorStyles.None;
+            resultLabel.AutoEllipsis = true;
             resultLabel.AutoSize = true;
             resultLabel.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            resultLabel.Location = new Point(199, 183);
+            resultLabel.Location = new Point(228, 183);
             resultLabel.Name = "resultLabel";
             resultLabel.Size = new Size(29, 20);
             resultLabel.TabIndex = 6;
@@ -186,5 +203,6 @@
         private ProgressBar resultProgressBar;
         private TextBox inputTextBox;
         private Label revealTargetLabel;
+        private Label successResultLabel;
     }
 }
