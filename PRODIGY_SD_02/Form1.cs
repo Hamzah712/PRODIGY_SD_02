@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics.X86;
 
@@ -6,6 +7,11 @@ namespace PRODIGY_SD_02
 {
     public partial class form : Form
     {
+        private System.Windows.Forms.Timer timer;
+        private Color[] colors = { Color.DarkRed, Color.Green, Color.DarkBlue, Color.Black, Color.Orange };
+        private int currentColorIndex = 0;
+
+
         private static Random random = new Random();
         private int targetNum;
         private bool gameWon = false;
@@ -15,7 +21,18 @@ namespace PRODIGY_SD_02
         {
             InitializeComponent();
             targetNum = randNum();
+
+            InitializeTimer();
+
         }
+
+        private void InitializeTimer()
+        {
+            timer = new System.Windows.Forms.Timer();
+            timer.Tick += new EventHandler(ColorChangeTimer_Tick);
+            timer.Interval = 2000; 
+            timer.Start();
+        }   
 
         public int randNum()
         {
@@ -100,6 +117,13 @@ namespace PRODIGY_SD_02
             resultProgressBar.Value = 0;
             inputTextBox.Clear();
             gameWon = false;
+        }
+
+        private void ColorChangeTimer_Tick(object sender, EventArgs e)
+        {
+            currentColorIndex = (currentColorIndex + 1) % colors.Length;
+            revealTargetLabel.BackColor = colors[currentColorIndex];
+            Update();
         }
     }
 }
